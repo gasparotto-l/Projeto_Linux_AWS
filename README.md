@@ -1,4 +1,4 @@
-# Projeto Linux AMS
+# Projeto Linux AWS
 
 **Info:**
 - Autor: Luiz Henrique Gasparotto
