@@ -1,10 +1,17 @@
 # Projeto Linux AWS
-
 **Info:**
 - Autor: Luiz Henrique Gasparotto
 - Data: 17/03 a 27/03
-- Ferramentas Utilizadas: Interface AWS e MSL (Linux).
+- Ferramentas Utilizadas: Interface AWS e WSL (Subsystem Linux).
+**Descrição do Projeto:**
+- Este projeto foi desenvolvido como parte de um processo de estágio, com o objetivo de explorar e  desenvolver habilidades praticas em administração de infraestrutura AWS, configuração de servidores web e automação simples de monitoramento.
 
+A atividade consistiu em:
+- Criar uma VPC com sub-redes públicas e privadas na AWS.
+- Configurar uma instância EC2 com Ubuntu Server para hospedar um site estático via Nginx.
+- Implementar um script de monitoramento em Bash que verifica periodicamente se o site está no ar e registra logs.
+- Fase de testes e ajustes para garantir que tudo funcione conforme o esperado.
+  
 **Passo-a-Passo Realizado:**
 
 ### 1. Configuração do Ambiente via Interface AWS:
