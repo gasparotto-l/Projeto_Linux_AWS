@@ -59,12 +59,16 @@ Algumas preparações feitas antes do inicio do projeto:
 | **Sub-redes Privadas** | 2 (para alta disponibilidade) |
 | **Internet Gateway** | 1 (para acesso à internet) |
 
+**1. Criação da VPC**
+- 1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
+	![image](https://github.com/user-attachments/assets/2a3fd46f-a588-4c8c-b9e3-e19dcd88780d)
+- 1.1.1 Cliquei em create vpc, e parti para as configuraçõesda VPC
+   	 ![image](https://github.com/user-attachments/assets/4cdb9d1e-fb67-43e7-90ae-772768c1f83b)
+
+- 1.2 Configuração da VPC:
 ---
 
-### 3. Instalação e configuração da pagin web(Nginx)
-
-
----
+### 3. Instalação e configuração da pagina web(Nginx)
 
 **1 . Instalando:**
   - Logado em minha instacia EC2, realizei primeiramente atualizações basicas do sistema
@@ -72,31 +76,29 @@ Algumas preparações feitas antes do inicio do projeto:
   - Instale o programa do nginx utilizando esses comandos:
 	  `$ sudo apt-get install nginx -y`
 
-2 . Configurando:
-	2.1 Criando pagina web:
-		- Acessei o diretorio /var/www/ -> E criei um novo diretorio para alocar o html da minha pagina web '' $ mkdir sitelocal ''
-			- criei um arquivo "index.html" e adicionei meu html pre-feito no visual code a ao arquivo: 
-				 $ sudo nano index.html
-     
-	2.2 Configurando o caminho:
-		Exclui o arquivo default base do nginx e criei um novo arquivo de mesmo nome e adicionei as seguintes configurações:
-		[PRINT DA CONFIG]
+**2 . Configurando:**
+- 2.1 Criando pagina web:
+	- Acessei o diretorio /var/www/ -> E criei um novo diretorio para alocar o html da minha pagina web '' $ mkdir sitelocal ''
+	- criei um arquivo "index.html" e adicionei meu html pre-feito no visual code, ao arquivo: 
+`$ sudo nano index.html`
   
-		Ativei o site com " " e reiniciei o sistema do nginx para as configurações serem aplicados.
-		[PRINT DO SITE]
-		[PRINT DO STATUS NGINX]
+**2.2 Configurando o caminho:**
+- Exclui o arquivo default base do nginx e criei um novo arquivo de mesmo nome e adicionei as seguintes configurações:
+	- [PRINT DA CONFIG]
+- Ativei o site com " " e reiniciei o sistema do nginx para as configurações serem aplicados.
+	- [PRINT DO SITE]
+	- [PRINT DO STATUS NGINX]
+- OBS: caso queira voce pode criar um arquivo de configuração unico para seu site ao inves de alterar o default.
+	- [EXEMPLO]
   
-		OBS: caso queira voce pode criar um arquivo de configuração unico para seu site ao inves de alterar o default.
-		[EXEMPLO]
+**2.3 Acessando o site:**
+- Acessei meu site pelo endereço de ipv4 publico vinculado a subnet " ".
+- Também acessei por m	eu do dns publico da aws para verificar sua disponibilidade web via http.
+[PRINTS DO ACESSO]
   
-	2.3 Acessando o site:
- 
-		Acessei meu site pelo endereço de ipv4 publico vinculado a subnet " ".
-		Também acessei por meu do dns publico da aws para verificar sua disponibilidade web via http.
-		[PRINTS DO ACESSO]
-
-
-
-
 ---
+
+
+
+
 
