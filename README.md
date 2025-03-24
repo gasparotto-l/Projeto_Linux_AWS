@@ -68,7 +68,7 @@ Algumas preparações feitas antes do inicio do projeto:
 - 1.2 Configuração da VPC:
 ---
 
-### 3. Instalação e configuração da pagina web(Nginx)(#-servidor-web)
+### 3. Instalação e configuração da pagina web(Nginx)(#-servidor-web)<a name="-servidor-web"></a>
 
 **1 . Instalando:**
   - Logado em minha instacia EC2, realizei primeiramente atualizações basicas do sistema
