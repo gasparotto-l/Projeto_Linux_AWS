@@ -45,6 +45,7 @@ Desenvolver habilidades práticas em:
 ### 1. Preparação 
 Algumas preparações feitas antes do inicio do projeto:
 - Criação de uma pagina html para utilização no site.
+- Criação de um guia para realização do projeto, para reutilização.
 - Registros(prints) do ambiente AWS antes da criação da VPC e EC2.
 
 
@@ -58,11 +59,41 @@ Algumas preparações feitas antes do inicio do projeto:
 | **Sub-redes Privadas** | 2 (para alta disponibilidade) |
 | **Internet Gateway** | 1 (para acesso à internet) |
 
+---
+
+### 3. Instalação e configuração da pagin web(Nginx)
 
 
+---
 
+**1 . Instalando:**
+  - Logado em minha instacia EC2, realizei primeiramente atualizações basicas do sistema
+    - usei esses dois comandos: `$ sudo apt-get update` e `$ sudo apt-get upgrade` apos as atualizações serem realizadas está tudo pronto da realização da instalação do nginx
+  - Instale o programa do nginx utilizando esses comandos:
+	  `$ sudo apt-get install nginx -y`
 
-
+2 . Configurando:
+	2.1 Criando pagina web:
+		- Acessei o diretorio /var/www/ -> E criei um novo diretorio para alocar o html da minha pagina web '' $ mkdir sitelocal ''
+			- criei um arquivo "index.html" e adicionei meu html pre-feito no visual code a ao arquivo: 
+				 $ sudo nano index.html
+     
+	2.2 Configurando o caminho:
+		Exclui o arquivo default base do nginx e criei um novo arquivo de mesmo nome e adicionei as seguintes configurações:
+		[PRINT DA CONFIG]
+  
+		Ativei o site com " " e reiniciei o sistema do nginx para as configurações serem aplicados.
+		[PRINT DO SITE]
+		[PRINT DO STATUS NGINX]
+  
+		OBS: caso queira voce pode criar um arquivo de configuração unico para seu site ao inves de alterar o default.
+		[EXEMPLO]
+  
+	2.3 Acessando o site:
+ 
+		Acessei meu site pelo endereço de ipv4 publico vinculado a subnet " ".
+		Também acessei por meu do dns publico da aws para verificar sua disponibilidade web via http.
+		[PRINTS DO ACESSO]
 
 
 
