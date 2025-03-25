@@ -5,22 +5,12 @@
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
 ## 📑 Menu de Navegação
-| Seção | Descrição |
-|-------|-----------|
-| [ℹ️ Informações Gerais](#-informações-gerais) | Detalhes sobre o projeto |
-| [🔧 Configuração do Ambiente](#-configuração-do-ambiente) | Setup da infraestrutura AWS |
-| [🖥️ Configuração da EC2](#-configuração-da-ec2) | Detalhes da instância |
-| [🌐 Servidor Web](#-servidor-web) | Instalação e configuração do Nginx |
-| [🔔 Monitoramento](#-monitoramento) | Script de verificação |
-| [🧪 Testes](#-testes) | Validação do sistema |
-| [📝 Considerações](#-considerações) | Observações finais |
+
 
 ---
 
-## ℹ️ Informações Gerais <a name="-informações-gerais"></a>
-[🔝 Voltar ao Menu](#-menu-de-navegação)
 
-### 📌 Detalhes do Projeto
+### Detalhes do Projeto
 - **Autor:** Luiz Henrique Gasparotto
 - **Período:** 17/03 a 27/03
 - **Ferramentas:**
@@ -28,7 +18,7 @@
   - WSL (Windows Subsystem for Linux)
   - Ubuntu Server
 
-### 🎯 Objetivo
+### Objetivo
 Desenvolver habilidades práticas em:
 - Administração de infraestrutura AWS
 - Configuração de servidores web (Nginx)
@@ -36,9 +26,6 @@ Desenvolver habilidades práticas em:
 
 ---
 
-
-## 🔧 Configuração do Ambiente <a name="-configuração-do-ambiente"></a>
-[🔝 Voltar ao Menu](#-menu-de-navegação)
 
 ---
 
@@ -50,8 +37,8 @@ Algumas preparações feitas antes do inicio do projeto:
 
 
 ---
-### 2. Arquitetura da VPC
-
+### 2.VPC(Virtual Private Cloud)
+Infraestrutura:
 | Componente | Configuração |
 |------------|--------------|
 | **Bloco CIDR** | 10.0.0.0/16 |
@@ -59,14 +46,42 @@ Algumas preparações feitas antes do inicio do projeto:
 | **Sub-redes Privadas** | 2 (para alta disponibilidade) |
 | **Internet Gateway** | 1 (para acesso à internet) |
 
-**1. Criação da VPC**
-- 1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
+**2.1 Criação da VPC**
+- 2.1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
 	![image](https://github.com/user-attachments/assets/2a3fd46f-a588-4c8c-b9e3-e19dcd88780d)
-- 1.1.1 Cliquei em create vpc, e parti para as configuraçõesda VPC
+- 2.2 Cliquei em create vpc, e parti para as configuraçõesda VPC
    	 ![image](https://github.com/user-attachments/assets/4cdb9d1e-fb67-43e7-90ae-772768c1f83b)
 
-- 1.2 Configuração da VPC:
+- 2.3 Configuração da VPC:
+  	imagem
+  	imagem
+  	imagem
 ---
+
+### 3. Instancia EC2:
+- 3.1 Na interface grafica da AWS pesquisei por EC2 na barra de pesquisa
+  Imagem
+	-  3.1.1 Selicionei Launch EC2 e parti para as configurações.
+- 3.2 Configurações da Ec2:
+	- 3.2.1 Selecionei o ubuntu como tipo de imagem de sistema operacional.
+   	- 3.2.2 Começei as configurações de rede:
+  		- 3.3: Selecionei minha vpc criada anteriormente
+   	  	- 3.3.1 Selecionei uma das minhas subnets publicas
+   	  	- 3.3.2 Habilitei o a Atribuição de IP público.
+   	- 3.4: Criei um Security group para dar acesso ssh(porta 22) e http(porta 80) & Key pairs
+   	  	- 3.4.1 Deixei o ssh vinculado apenas ao ip da minha maquina por questoes de seguranças, por ser o acesso as configurações da instancia.
+   	  	  Imagem
+   	  	- 3.4.1 Já o http está aberto para 0.0.0.0 para que possa ser acessado na internet por outras maquinas e em outros lugares. A medida foi tomada para fim de testes da conectividade do servidor web.
+   	  	  Imagem
+   	  	- 3.5 Criei uma Key pair na interface AWS, como medida de segurança, para o acesso ssh.
+   	  	  	Imagem
+   	  	  	- 3.5.1 Como estou usando o Wsl foi preciso mover a key para o subsistem por meio do explorador de arquivos.
+   	  	  	Imagem
+		- 3.6 Fui ate a pasta em que minha key pair estava e alterei as permissoes de acesso da para 400. Essa é uma medida de segurança para que essa key nao pode ser lida ou alterada por nenhum usuario, exceção ao root.
+   	- 3.7 Acesso via ssh:
+   	  	3.7.1 Utilizando o comando
+###
+
 
 ### 3. Instalação e configuração da pagina web(Nginx)(#-servidor-web)<a name="-servidor-web"></a>
 
