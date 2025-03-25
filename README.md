@@ -4,11 +4,7 @@
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
-## 📑 Menu de Navegação
-
-
 ---
-
 
 ### Detalhes do Projeto
 - **Autor:** Luiz Henrique Gasparotto
@@ -23,9 +19,6 @@ Desenvolver habilidades práticas em:
 - Administração de infraestrutura AWS
 - Configuração de servidores web (Nginx)
 - Automação de monitoramento com Bash
-
----
-
 
 ---
 
@@ -48,9 +41,9 @@ Infraestrutura:
 
 **2.1 Criação da VPC**
 - 2.1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
-	![image](https://github.com/user-attachments/assets/2a3fd46f-a588-4c8c-b9e3-e19dcd88780d)
+	![image](VPC1.png)
 - 2.2 Cliquei em create vpc, e parti para as configuraçõesda VPC
-   	 ![image](https://github.com/user-attachments/assets/4cdb9d1e-fb67-43e7-90ae-772768c1f83b)
+   	 ![image](VPC2.png)
 
 - 2.3 Configuração da VPC:
   	imagem
@@ -110,7 +103,7 @@ Na interface grafica da AWS pesquisei por EC2 na barra de pesquisa
 **2.3 Acessando o site:**
 - Acessei meu site pelo endereço de ipv4 publico vinculado a subnet " ".
 - Também acessei por m	eu do dns publico da aws para verificar sua disponibilidade web via http.
-[PRINTS DO ACESSO]
+	[PRINTS DO ACESSO]
   
 ---
 
