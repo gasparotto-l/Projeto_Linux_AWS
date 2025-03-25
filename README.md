@@ -41,7 +41,7 @@ Infraestrutura:
 
 **2.1 Criação da VPC**
 - 2.1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
-	![image](VPC1.png)
+	![imagem VPC](img/VPC1.png)
 - 2.2 Cliquei em create vpc, e parti para as configuraçõesda VPC
    	 ![image](VPC2.png)
 
