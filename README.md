@@ -59,9 +59,10 @@ Infraestrutura:
 ---
 
 ### 3. Instancia EC2:
-- 3.1 Na interface grafica da AWS pesquisei por EC2 na barra de pesquisa
+Na interface grafica da AWS pesquisei por EC2 na barra de pesquisa
   Imagem
-	-  3.1.1 Selicionei Launch EC2 e parti para as configurações.
+ E selecionei Launch EC2 e parti para as configurações.
+
 - 3.2 Configurações da Ec2:
 	- 3.2.1 Selecionei o ubuntu como tipo de imagem de sistema operacional.
    	- 3.2.2 Começei as configurações de rede:
