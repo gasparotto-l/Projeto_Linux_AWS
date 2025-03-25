@@ -51,59 +51,114 @@ Infraestrutura:
   	imagem
 ---
 
-### 3. Instancia EC2:
-Na interface grafica da AWS pesquisei por EC2 na barra de pesquisa
-  Imagem
- E selecionei Launch EC2 e parti para as configurações.
+## 3. Instância EC2
 
-- 3.2 Configurações da Ec2:
-	- 3.2.1 Selecionei o ubuntu como tipo de imagem de sistema operacional.
-   	- 3.2.2 Começei as configurações de rede:
-  		- 3.3: Selecionei minha vpc criada anteriormente
-   	  	- 3.3.1 Selecionei uma das minhas subnets publicas
-   	  	- 3.3.2 Habilitei o a Atribuição de IP público.
-   	- 3.4: Criei um Security group para dar acesso ssh(porta 22) e http(porta 80) & Key pairs
-   	  	- 3.4.1 Deixei o ssh vinculado apenas ao ip da minha maquina por questoes de seguranças, por ser o acesso as configurações da instancia.
-   	  	  Imagem
-   	  	- 3.4.1 Já o http está aberto para 0.0.0.0 para que possa ser acessado na internet por outras maquinas e em outros lugares. A medida foi tomada para fim de testes da conectividade do servidor web.
-   	  	  Imagem
-   	  	- 3.5 Criei uma Key pair na interface AWS, como medida de segurança, para o acesso ssh.
-   	  	  	Imagem
-   	  	  	- 3.5.1 Como estou usando o Wsl foi preciso mover a key para o subsistem por meio do explorador de arquivos.
-   	  	  	Imagem
-		- 3.6 Fui ate a pasta em que minha key pair estava e alterei as permissoes de acesso da para 400. Essa é uma medida de segurança para que essa key nao pode ser lida ou alterada por nenhum usuario, exceção ao root.
-   	- 3.7 Acesso via ssh:
-   	  	3.7.1 Utilizando o comando
-###
+1. Na interface gráfica da AWS:
+   - Pesquisei por "EC2" na barra de pesquisa  
+     ![Imagem Busca EC2](img/ec2-search.png)
+   - Selecionei "Launch Instance" para iniciar as configurações
+
+---
+
+### 3.2 Configurações da EC2
+
+#### 3.2.1 Tipo de Imagem
+- **Sistema Operacional**: Ubuntu (Amazon Machine Image)
+
+#### 3.2.2 Configurações de Rede
+- **VPC**: 
+  - Utilizei a VPC criada anteriormente
+- **Subnet**:
+  - Selecionada uma subnet pública
+- **IP Público**:
+  - Atribuição automática habilitada
+
+---
+
+### 3.3 Security Group
+
+**Regras configuradas**:
+
+| Porta | Protocolo | Origem               | Finalidade                |
+|-------|-----------|----------------------|---------------------------|
+| 22    | TCP       | Meu IP (ex: 189.5.0.1) | Acesso SSH seguro         |
+| 80    | TCP       | 0.0.0.0/0            | Acesso HTTP para testes   |
+
+![Imagem Security Group](img/security-group.png)
+
+---
+
+### 3.4 Key Pair
+
+1. **Criação**:
+   - Gerada via console AWS  
+     ![Imagem Key Pair](img/key-pair.png)
+
+2. **Configuração no WSL**:
+   - Arquivo transferido para o subsistema Linux  
+     ![Imagem WSL Key](img/wsl-key.png)
+
+3. **Permissões**:
+   ```bash
+   chmod 400 ~/path/to/my-key.pem
+
+---
 
 
-### 3. Instalação e configuração da pagina web(Nginx)(#-servidor-web)<a name="-servidor-web"></a>
+## 4. Instalação e configuração da página web (Nginx)
 
-**1 . Instalando:**
-  - Logado em minha instacia EC2, realizei primeiramente atualizações basicas do sistema
-    - usei esses dois comandos: `$ sudo apt-get update` e `$ sudo apt-get upgrade` apos as atualizações serem realizadas está tudo pronto da realização da instalação do nginx
-  - Instale o programa do nginx utilizando esses comandos:
-	  `$ sudo apt-get install nginx -y`
+- **4.1 Instalando**:
+  - Atualizei o sistema com:
+    ```bash
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    ```
+  - Instalei o Nginx usando:
+    ```bash
+    sudo apt-get install nginx -y
+    ```
+    ![Print Instalação](img/install-nginx.png)
 
-**2 . Configurando:**
-- 2.1 Criando pagina web:
-	- Acessei o diretorio /var/www/ -> E criei um novo diretorio para alocar o html da minha pagina web '' $ mkdir sitelocal ''
-	- criei um arquivo "index.html" e adicionei meu html pre-feito no visual code, ao arquivo: 
-`$ sudo nano index.html`
-  
-**2.2 Configurando o caminho:**
-- Exclui o arquivo default base do nginx e criei um novo arquivo de mesmo nome e adicionei as seguintes configurações:
-	- [PRINT DA CONFIG]
-- Ativei o site com " " e reiniciei o sistema do nginx para as configurações serem aplicados.
-	- [PRINT DO SITE]
-	- [PRINT DO STATUS NGINX]
-- OBS: caso queira voce pode criar um arquivo de configuração unico para seu site ao inves de alterar o default.
-	- [EXEMPLO]
-  
-**2.3 Acessando o site:**
-- Acessei meu site pelo endereço de ipv4 publico vinculado a subnet " ".
-- Também acessei por m	eu do dns publico da aws para verificar sua disponibilidade web via http.
-	[PRINTS DO ACESSO]
+---
+
+- **4.2 Configurando**:
+  - Criei o diretório do site:
+    ```bash
+    sudo mkdir /var/www/sitelocal
+    cd /var/www/sitelocal
+    ```
+  - Adicionei meu HTML:
+    ```bash
+    sudo nano index.html
+    ```
+    ![Print HTML](img/html-code.png)
+
+---
+
+- **4.3 Configurando Nginx**:
+  - Removi o default:
+    ```bash
+    sudo rm /etc/nginx/sites-enabled/default
+    ```
+  - Criei nova configuração:
+    ```bash
+    sudo nano /etc/nginx/sites-available/sitelocal
+    ```
+    ![Print Config](img/nginx-config.png)
+  - Reiniciei o serviço:
+    ```bash
+    sudo systemctl restart nginx
+    ```
+    ![Print Status](img/nginx-status.png)
+
+---
+
+- **4.4 Acessando**:
+  - Acessei via:
+    ```bash
+    http://<IP_PUBLICO>
+    ```
+    ![Print Site](img/site-access.png)
   
 ---
 
