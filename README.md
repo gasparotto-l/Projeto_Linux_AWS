@@ -4,18 +4,20 @@
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
+
 ---
+
+
 ### Menu do Projeto:
 - | [Menu do Projeto](#menu-do-projeto) | [Detalhes do Projeto](#detalhes-do-projeto) | [Objetivo do projeto](#objetivo-do-projeto) |
 - | [Introdução](#introdução) | - [VPC](#vpc) | [EC2](#ec2) | 
 - | [Servidor Web Nginx](#servidor-web-nginx) | [Webhook com Discord](#webhook-com-discord) | [Script de Monitoramento](#script-de-monitoramento) | [Automação com Cron](#automação-com-cron) |
-- | [Testes](#testes) | [Observações](#observações) | [Experiiencia e Considerações Finais](#experiencia-e-considerações-finais) |
-
-
+- | [Testes](#testes) | [Observações](#observações) | [Experiencia e Considerações Finais](#experiencia-e-considerações-finais) |
 
 
 
 ---
+
 
 ### Detalhes do Projeto
 - **Autor:** Luiz Henrique Gasparotto
@@ -31,13 +33,25 @@ Desenvolver habilidades práticas em:
 - Configuração de servidores web (Nginx)
 - Automação de monitoramento com Bash
 
+
 ---
 
 ### Introdução
+- Neste projeto pessoal, explorei a infraestrutura em nuvem da AWS e o ambiente Linux para criar um servidor web básico com monitoramento automatizado. Utilizei ferramentas como a Interface AWS e o WSL (Windows Subsystem for Linux) para configurar uma instância EC2, implantar um site estático com Nginx e desenvolver um script em Bash para verificar se o site estava no ar.
 
+Minhas principais tarefas foram:
+- Criar uma VPC com sub-redes públicas e privadas na AWS
+- Configurar uma instância EC2 com Ubuntu Server
+- Instalar e configurar o Nginx para hospedar uma página HTML simples
+- Desenvolver um script de monitoramento que verifica a disponibilidade do site e registra logs
+- Automatizar o processo usando CRON para execução periódica
+
+O objetivo foi praticar administração de sistemas em nuvem, automação e configuração de servidores, desenvolvendo conhecimentos em AWS, Linux e Bash.
 
 
 ---
+
+
 ### VPC
 Infraestrutura:
 | Componente | Configuração |
@@ -47,10 +61,10 @@ Infraestrutura:
 | **Sub-redes Privadas** | 2 (para alta disponibilidade) |
 | **Internet Gateway** | 1 (para acesso à internet) |
 
-**2.1 Criação da VPC**
-- 2.1.1 Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
+**Criação da VPC**
+- Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
 ![Image](https://github.com/user-attachments/assets/8e317ab4-625e-4344-bedf-bd1f359f582f)
-- 2.2 Cliquei em create vpc, e parti para as configurações.
+- Cliquei em create vpc, e parti para as configurações.
 ![Image](https://github.com/user-attachments/assets/b7b4180f-6138-4755-9152-83f550b09265)
 
 ### 2.3 Configuração da VPC:
