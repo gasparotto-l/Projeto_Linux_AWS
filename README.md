@@ -34,7 +34,10 @@ Desenvolver habilidades práticas em:
 - Automação de monitoramento com Bash
 
 
+
 ---
+
+
 
 ### Introdução
 - Neste projeto pessoal, explorei a infraestrutura em nuvem da AWS e o ambiente Linux para criar um servidor web básico com monitoramento automatizado. Utilizei ferramentas como a Interface AWS e o WSL (Windows Subsystem for Linux) para configurar uma instância EC2, implantar um site estático com Nginx e desenvolver um script em Bash para verificar se o site estava no ar.
@@ -49,7 +52,10 @@ Minhas principais tarefas foram:
 O objetivo foi praticar administração de sistemas em nuvem, automação e configuração de servidores, desenvolvendo conhecimentos em AWS, Linux e Bash.
 
 
+
+
 ---
+
 
 
 ### VPC
@@ -63,14 +69,15 @@ Infraestrutura:
 
 **Criação da VPC**
 - Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
-![Image](https://github.com/user-attachments/assets/8e317ab4-625e-4344-bedf-bd1f359f582f)
+  IMAGEM PESQUISA VPC
 - Cliquei em create vpc, e parti para as configurações.
-![Image](https://github.com/user-attachments/assets/b7b4180f-6138-4755-9152-83f550b09265)
+  IMAGEM CREATE VPC
 
-### 2.3 Configuração da VPC:
+
+### 1. Configuração da VPC:
+
+  IMAGEM CONFIG VPC
   
-  ![Image](https://github.com/user-attachments/assets/05d5fbdd-260d-4c3e-9130-21f3bf5af9f6)
-
 **Minhas Escolhas:**
 - VPC e outros recursos
   - Criei tudo completo (sub-redes, gateways) pra já ficar pronto pra usar -
@@ -82,7 +89,7 @@ Infraestrutura:
 - 2 Zonas de Disponibilidade:
   - O mínimo recomendado pra ter redundância básica
   
-![Image](https://github.com/user-attachments/assets/c873eb99-906b-449c-9aff-efb626408399)
+IMAGEM AQUI
 
 **Estrutura Básica:**
 - Redes: Subnets & zonas
@@ -98,35 +105,41 @@ Extra:
 - DNS ativado: Para resolver nomes internos
 
 **Visão Geral da VPC:**
-![Image](https://github.com/user-attachments/assets/b4cf262f-5825-4b63-90ec-95fbc27a17ea)
+
+IMAGEM VISAO GERAL VPC
+
 - Observações:
   - O nome escolhido para vpc foi referente ao dia em que ela estava sendo testada, se aparecer outro nomenclatura para a vpc ou ec2 durante essa documentação não se importe, os nomes não alteram o processo do projeto.
 
 
 
-
-   
 ---
+
+
 
 ### EC2
 
-1. Na interface gráfica da AWS:
+- **Na interface gráfica da AWS:**
    - Pesquisei por "EC2" na barra de pesquisa  
-     ![Image](https://github.com/user-attachments/assets/857aea70-9ef9-4053-be8b-fe1a41e3295d)
+     ![Image](https://github.com/user-attachments/assets/857aea70-9ef9-4053-be8b-fe1a41e3295d) | IMAGEM PESQUISA VPC
    - Selecionei "Launch Instance" para iniciar as configurações
-     ![Image](https://github.com/user-attachments/assets/d5c532c4-0e10-46c8-96a7-1a806620112c)
+     ![Image](https://github.com/user-attachments/assets/d5c532c4-0e10-46c8-96a7-1a806620112c) | IMAGEM LAUNCH VPC
+
+     
 ---
 
-### 3.2 Configurações da EC2
 
-#### 3.2.1 Tipo de Imagem
+
+### Configurações da EC2
+
+####  Tipo de Imagem
 - **Sistema Operacional**: Ubuntu (Amazon Machine Image)
-    ![Image](https://github.com/user-attachments/assets/c08cdd3b-d90c-4767-96ed-cad38294a426)
+    ![Image](https://github.com/user-attachments/assets/c08cdd3b-d90c-4767-96ed-cad38294a426) | IMAGEM TIPO IMAGEM
 - **Tipo de Instancia**: T2 micro. -> Escolhi por ser uma instancia mais simples, e estar disponivel no free tier
-    ![Image](https://github.com/user-attachments/assets/598f29f1-1043-42f6-8b56-965274d3f8f1)
+    ![Image](https://github.com/user-attachments/assets/598f29f1-1043-42f6-8b56-965274d3f8f1) | IMAGEM TIPO INSTANCIA
   
-#### 3.2.2 Configurações de Rede
-![Image](https://github.com/user-attachments/assets/7340bb9c-30e1-4e78-b92b-061724b4cfa1)
+#### Configurações de Rede
+![Image](https://github.com/user-attachments/assets/7340bb9c-30e1-4e78-b92b-061724b4cfa1) | IMAGEM CONFIG REDE VPC
 - **VPC**: 
   - Utilizei a VPC criada anteriormente
 - **Subnet**:
@@ -134,9 +147,14 @@ Extra:
 - **IP Público**:
   - Atribuição automática habilitada
 
+
+
+
 ---
 
-### 3.3 Security Group
+
+
+### Security Group
 
 **Regras configuradas**:
 
@@ -145,43 +163,50 @@ Extra:
 | 22    | TCP       | Meu IP (ex: 189.5.0.1) | Acesso SSH seguro         |
 | 80    | TCP       | 0.0.0.0/0            | Acesso HTTP para testes   |
 
-![Image](https://github.com/user-attachments/assets/0845ab5c-d773-447e-aff1-410141718335)
+![Image](https://github.com/user-attachments/assets/0845ab5c-d773-447e-aff1-410141718335) | IMAGEM SECURITY GROUP
+
+
 
 ---
 
-### 3.4 Key Pair
 
-- 3.4.1 **Criando Key pair e acessando via ssh**:
+
+### Key Pair
+
+- 1 **Criando Key pair e acessando via ssh**:
    - Gerada via console AWS  
-     ![Image](https://github.com/user-attachments/assets/4b26d7cb-db0f-46a1-9d59-d721e441b377)
+     ![Image](https://github.com/user-attachments/assets/4b26d7cb-db0f-46a1-9d59-d721e441b377) | IMAGEM CRIANDO KEY PAIR
 
-- 3.4.2 **Configuração no WSL**:
+- 2 **Configuração no WSL**:
    - Arquivo transferido para o subsistema Linux  
-     ![Image](https://github.com/user-attachments/assets/b8b307be-9ed6-4313-b5cb-c0337adc7b4e)
+     ![Image](https://github.com/user-attachments/assets/b8b307be-9ed6-4313-b5cb-c0337adc7b4e) | IMAGEM TRANSFERINDO KEY PAIR
 
-- 3.4.3 **Permissões**:
-![Image](https://github.com/user-attachments/assets/46371724-1927-4250-a25c-90831425bd94)
+- 3 **Permissões**:
+![Image](https://github.com/user-attachments/assets/46371724-1927-4250-a25c-90831425bd94) 
    ```bash
    chmod 400 ~/path/to/my-key.pem
-- 3.5 **Acessando a via ssh:**
+- 4 **Acessando a via ssh:**
     - 3.5.1 Primeiro peguei o IPV4:
-    ![Image](https://github.com/user-attachments/assets/c269726f-fad5-4ff7-8885-fa16bd70c9f9)
+    ![Image](https://github.com/user-attachments/assets/c269726f-fad5-4ff7-8885-fa16bd70c9f9) | IMAGEM IPV4
     - Peguei o ipv4 publico para conecatar via ssh na instancia, a partir disso vou poder partir pras configurações.
-- 3.6 **Acesso via console WSL:**
+- 5 **Acesso via console WSL:**
   
-![image](https://github.com/user-attachments/assets/62a2c895-0954-4e46-a00a-5950c4293645)
+![image](https://github.com/user-attachments/assets/62a2c895-0954-4e46-a00a-5950c4293645) 
 
 - Utilezei esse comando pra acessar o ssh, com minha key pair e ipv4 publico da instancia.
   ```bash
     $ sudo ssh -i chaveteste.pem ubuntu@ipv4VaiAqui
   ```    
+
+
       
 ---
 
 
+
 ### Servidor Web Nginx
 
-- **4.1 Instalando**:
+- ** Instalando**:
   - Atualizei o sistema com:
     ```bash
     sudo apt-get update
@@ -195,9 +220,12 @@ Extra:
     sudo systemctl enable nginx
     ```
 
+
 ---
 
-- **4.2 Configurando**:
+
+
+- **Configurando**:
   - Utilizando o Nano adicionei meu HTML a ser exibido ao acessar o servidor. 
     ```bash
     sudo nano /var/www/html/index.html
@@ -331,10 +359,12 @@ Extra:
     sudo systemctl restart nginx
     ```
    - E agora o site está online e com o html alterado.
+
+
  
 ---
 
-- **4.4 Acessando**:
+- **Acessando**:
   - Acessei via:
     ```bash
     http://<IP_PUBLICO_DA_INSTANCIA> 
@@ -342,9 +372,11 @@ Extra:
     ```bash
     http://localhost 
     ```
-![image](https://github.com/user-attachments/assets/3b0097c8-da42-4b13-ab68-d1c29628b5fd)
+![image](https://github.com/user-attachments/assets/3b0097c8-da42-4b13-ab68-d1c29628b5fd) | IMAGEM SITE
   
 ---
+
+
 
 ### Configuração do SystemD
 - Editei o serviço do nginx para garantir reinicilização automatica:
@@ -368,15 +400,18 @@ Extra:
   $ sudo systemctl status nginx
 ```
 
+
 ---
 
 ### Webhook com Discord
  - Antes de começar a criar e usar o script de monitoramento, fiz a integração do webhook no discord:
  - Comecei criando um servidor pessoal e criei dois canais de texto, um em que fiz testes do script localmente e o outro para atender a instancia EC2 que estou utilizando no projeto
-![image](https://github.com/user-attachments/assets/53c3ac03-a345-4e5f-8d4d-e9d042b16b6c)
+![image](https://github.com/user-attachments/assets/53c3ac03-a345-4e5f-8d4d-e9d042b16b6c) | IMAGEM DISCORD ABERTO
  - No canal de texto #monitora-aws, cliquei no icone configurações e adicionei a integração do webhook
-![image](https://github.com/user-attachments/assets/42cc2b51-2ef6-438e-9995-df08c3ed2566)
+![image](https://github.com/user-attachments/assets/42cc2b51-2ef6-438e-9995-df08c3ed2566) | CRIANDO WEBHOOK
  - Peguei o Url do webhook e adicionei ao script para criar a integração.
+
+---
 
 ### Script de Monitoramento 
 
@@ -426,7 +461,9 @@ Extra:
     #==Fim do Script==#
     #==============================================================================================================#
     ```
-  - Explicação do Script: ADICIONAR AINDA
+    
+  - Explicação do Script: ADICIONAR AINDA <- IMPORTANTE
+
 
 - Naveguei até a pasta padrão pra guardar logs e criei o arquivo monitoramento.log para guardar os logs do site.
 ```bash
@@ -437,6 +474,11 @@ Extra:
 ```bash
   $ cat /var/log/monitoramento.log
 ```
+
+
+
+---
+
 ### Automação com Cron
 - Para automatizar a execução do script com o Cron, utilizei o seguinte comando para acessar suas configurações.
 ```bash
@@ -447,11 +489,18 @@ $ sudo crontab -e
 $ */1 * * * * /home/ubuntu/monitoramento.sh
 ```
 
+---
+
+
 ### Testes 
+ADICIONAR FOTOS E PRINTS
+
 
 ### Observações
+COISAS COMO USO DOS NOMES E ETC
 
 ### Experiencia e Considerações Finais
+CONTAR MINHA EXPERIENCIA
   
 
 
