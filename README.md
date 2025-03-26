@@ -5,6 +5,17 @@
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
 ---
+### Menu do Projeto:
+- | [Menu do Projeto](#menu-do-projeto) | [Detalhes do Projeto](#detalhes-do-projeto) | [Objetivo do projeto](#objetivo-do-projeto) |
+- | [Introdução](#introdução) | - [VPC](#vpc) | [EC2](#ec2) | 
+- | [Servidor Web Nginx](#servidor-web-nginx) | [Webhook com Discord](#webhook-com-discord) | [Script de Monitoramento](#script-de-monitoramento) | [Automação com Cron](#automação-com-cron) |
+- | [Testes](#testes) | [Observações](#observações) | [Experiiencia e Considerações Finais](#experiencia-e-considerações-finais) |
+
+
+
+
+
+---
 
 ### Detalhes do Projeto
 - **Autor:** Luiz Henrique Gasparotto
@@ -14,7 +25,7 @@
   - WSL (Windows Subsystem for Linux)
   - Ubuntu Server
 
-### Objetivo
+### Objetivo do Projeto
 Desenvolver habilidades práticas em:
 - Administração de infraestrutura AWS
 - Configuração de servidores web (Nginx)
@@ -22,12 +33,12 @@ Desenvolver habilidades práticas em:
 
 ---
 
-### 1. Introdução
+### Introdução
 
 
 
 ---
-### 2.VPC(Virtual Private Cloud)
+### VPC
 Infraestrutura:
 | Componente | Configuração |
 |------------|--------------|
@@ -83,7 +94,7 @@ Extra:
    
 ---
 
-## 3. Instância EC2
+### EC2
 
 1. Na interface gráfica da AWS:
    - Pesquisei por "EC2" na barra de pesquisa  
@@ -154,7 +165,7 @@ Extra:
 ---
 
 
-## 4. Instalação e configuração da página web (Nginx)
+### Servidor Web Nginx
 
 - **4.1 Instalando**:
   - Atualizei o sistema com:
@@ -345,7 +356,7 @@ Extra:
 
 ---
 
-### 5. WebHook com Discord
+### Webhook com Discord
  - Antes de começar a criar e usar o script de monitoramento, fiz a integração do webhook no discord:
  - Comecei criando um servidor pessoal e criei dois canais de texto, um em que fiz testes do script localmente e o outro para atender a instancia EC2 que estou utilizando no projeto
 ![image](https://github.com/user-attachments/assets/53c3ac03-a345-4e5f-8d4d-e9d042b16b6c)
@@ -353,7 +364,8 @@ Extra:
 ![image](https://github.com/user-attachments/assets/42cc2b51-2ef6-438e-9995-df08c3ed2566)
  - Peguei o Url do webhook e adicionei ao script para criar a integração.
 
-### 5. Script de Monitoramento 
+### Script de Monitoramento 
+
  - Acessei a pasta de usuario e criei o arquivo em que estará meu script.
    ```bash
    $ cd ~
@@ -411,7 +423,7 @@ Extra:
 ```bash
   $ cat /var/log/monitoramento.log
 ```
-### Automação com crontab 
+### Automação com Cron
 - Para automatizar a execução do script com o Cron, utilizei o seguinte comando para acessar suas configurações.
 ```bash
 $ sudo crontab -e
@@ -423,7 +435,9 @@ $ */1 * * * * /home/ubuntu/monitoramento.sh
 
 ### Testes 
 
-### Conclusão
+### Observações
+
+### Experiencia e Considerações Finais
   
 
 
