@@ -22,11 +22,8 @@ Desenvolver habilidades práticas em:
 
 ---
 
-### 1. Preparação 
-Algumas preparações feitas antes do inicio do projeto:
-- Criação de uma pagina html para utilização no site.
-- Criação de um guia para realização do projeto, para reutilização.
-- Registros(prints) do ambiente AWS antes da criação da VPC e EC2.
+### 1. Introdução
+
 
 
 ---
@@ -168,23 +165,21 @@ Extra:
   - Instalei o Nginx usando:
     ```bash
     sudo apt-get install nginx -y
+    sudo apt-get update -y
+    sudo systemctl start nginx
+    sudo systemctl enable nginx
     ```
-  ![Print Instalação](img/install-nginx.png)
 
 ---
 
 - **4.2 Configurando**:
-  - Criei o diretório do site:
-  ![Image](https://github.com/user-attachments/assets/93a1432e-b404-42e8-940f-d3d31cbb78f9)
+  - Utilizando o Nano adicionei meu HTML a ser exibido ao acessar o servidor. 
     ```bash
-    sudo mkdir /var/www/sitelocal
-    cd /var/www/sitelocal
+    sudo nano /var/www/html/index.html
     ```
-  - Adicionei meu HTML:
   ![Image](https://github.com/user-attachments/assets/798751e3-c338-4548-ae6f-993d1b84bbbd)
-    ```bash
-    sudo nano index.html
-   - Utilizei o nano para editar e adicionar meu html pre-feito no visual studio code.
+    
+   - O html pre-feito no visual studio code:
     ```bash
     <!DOCTYPE html>
   <html lang="pt-BR">
@@ -306,76 +301,129 @@ Extra:
     </html>
     ```
 
----
-
-- **4.3 Configurando Nginx**:
-  - Removi o default:
-    ```bash
-    sudo rm /etc/nginx/sites-enabled/default
-    ```
-
-  - Criei nova configuração:
-    ```bash
-    sudo nano /etc/nginx/sites-available/site
-    ```
-   ![image](https://github.com/user-attachments/assets/adcc60ff-7546-47ab-b967-de77daaeb525)
-
-  - Configurações do acesso ao site:
-    ```bash
-      server {
-      listen 80 default_server;
-      listen [::]:80 default_server;
-
-      root /var/www/sitelocal;
-      index index.html;
-
-      server_name _;
-
-      location / {
-          try_files $uri $uri/ =404;
-      }
-    }
-    ```
-  
     - Reiniciei o serviço:
     ```bash
     sudo systemctl restart nginx
     ```
-   - Agora o site está agora online e com o html alterado.
+   - E agora o site está online e com o html alterado.
  
-
 ---
 
 - **4.4 Acessando**:
   - Acessei via:
     ```bash
-    http://<IP_PUBLICO>
+    http://<IP_PUBLICO_DA_INSTANCIA> 
+    ```
+    ```bash
+    http://localhost 
     ```
 ![image](https://github.com/user-attachments/assets/3b0097c8-da42-4b13-ab68-d1c29628b5fd)
   
 ---
 
-### 5. Script de Monitoramento & WebHook com Discord
- - Acessei a past /opt (Pasta padrão para programas adicionais do sistema).
+### Configuração do SystemD
+- Editei o serviço do nginx para garantir reinicilização automatica:
+```bash 
+   $ sudo nano /usr/lib/systemd/system/nginx.service
+```
+- Com arquivo aberto editei a seção [Service] adicionando a reinicialização automatica:
+```bash 
+   Restart=always
+   RestartSec=7s
+```
+- Utilizei esses dois comandos: O primeiro para reiniciar as configurações do nginx.service e o segundo para reiniciar o programa, aplicando as configurações.
+```bash 
+   $ sudo systemctl daemon-reload
+   $ sudo systemctl restart nginx
+```
+- Testei usando esses comandos:
+```bash 
+  $ sudo systemctl status nginx
+  $ sudo pkill -9 nginx
+  $ sudo systemctl status nginx
+```
+
+---
+
+### 5. WebHook com Discord
+ - Antes de começar a criar e usar o script de monitoramento, fiz a integração do webhook no discord:
+ - Comecei criando um servidor pessoal e criei dois canais de texto, um em que fiz testes do script localmente e o outro para atender a instancia EC2 que estou utilizando no projeto
+![image](https://github.com/user-attachments/assets/53c3ac03-a345-4e5f-8d4d-e9d042b16b6c)
+ - No canal de texto #monitora-aws, cliquei no icone configurações e adicionei a integração do webhook
+![image](https://github.com/user-attachments/assets/42cc2b51-2ef6-438e-9995-df08c3ed2566)
+ - Peguei o Url do webhook e adicionei ao script para criar a integração.
+
+### 5. Script de Monitoramento 
+ - Acessei a pasta de usuario e criei o arquivo em que estará meu script.
    ```bash
-   $ sudo cd opt/
-   ```
- - Criei o arquivo
-   ```bash
+   $ cd ~
    $ sudo nano monitoramento.sh
    ```
-  - Adicionei meu script de monitoramento ao arquivo:
-![Image](https://github.com/user-attachments/assets/fcde86b9-8247-4c6e-b4a8-e765cc5f4f5e)
-  - Explicação do Script:
+  - Adicionei meu script de monitoramento feito previamente ao arquivo:
+    ```bash
+    #!/usr/bin/env bash
+    #==============================================================================================================#
+    #--Script de Monitoramento de Servidor Web Nginx | Versão: 1.0.0 | autor: Luiz Henrique Gasparotto |===========#
+    #==============================================================================================================#
 
-- Criei um arquivo monitoramento.log para guardar os logs:
-![image](https://github.com/user-attachments/assets/38152843-617f-4603-87d8-ac9b78270284)
+    #==Declarando variaveis pro Script | Url do site | Arquivos de Log | Webhook com Discord==#
+    SITE="http://localhost"
+    LOGSITE="/var/log/monitoramento.log"
+    WEBHOOK_DISC="https://discord.com/api/webhooks/1351565786560594060/YOQiWhNPl9Q0_gUDnNXj4a1-bjSJ-VbfhesI4ygLcmopa_Nq_7g8r8Ey_pWcyW_FaLcN"
 
-- Executei o comando para ver se está funcionando:
-  ![image](https://github.com/user-attachments/assets/9839bb44-383c-4f0a-b1bb-b1cd55ea17f1)
-  -  A mensagem deve aparecer no discord verificando a disponibilidade do site
-  ![image](https://github.com/user-attachments/assets/f2b59431-8618-4ce3-812d-5239af7a0480)
- 
+    #==============================================================================================================#
+    #==Inicio do Script==#
+
+    if curl -s --head "$SITE" | grep "200 OK" > /dev/null; then
+    # Online, registra no log
+    echo "$SITE está no ar - $(date)" >> "$LOGSITE"
+
+    # Qual a mensagem irá pro webhook?
+    MSGDISC=" **Status do Nginx**: O servidor está online!\n\n"
+    MSGDISC+=" **Monitoramento.sh Executado**: Verifique os logs em /var/log/monitoramento.log."
+
+    # Mensagem  webhook
+    curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MSGDISC\"}" "$WEBHOOK_DISC"
+    else
+    # Offline, Registra no log
+    echo "$SITE está offline - $(date)" >> "$LOGSITE"
+
+    # Qual a mensagem irá pro webhook
+    MSGDISC="  **Status do Nginx**: O servidor está offline no momento...\n\n"
+    MSGDISC+=" **Monitoramento.sh Executado**: Verifique os logs em /var/log/monitoramento.log.\n"
+    MSGDISC+=" **Status do Nginx**: Serviço Nginx será reiniciado ..."
+
+    # Mensagem webhook (Discord)
+    curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MSGDISC\"}" "$WEBHOOK_DISC"
+    fi
+
+    #==Fim do Script==#
+    #==============================================================================================================#
+    ```
+  - Explicação do Script: ADICIONAR AINDA
+
+- Naveguei até a pasta padrão pra guardar logs e criei o arquivo monitoramento.log para guardar os logs do site.
+```bash
+  $ cd /var/log/
+  $ touch monitoramento.log
+```
+- Para acessar o arquivo de log basta utilizar este comando:
+```bash
+  $ cat /var/log/monitoramento.log
+```
+### Automação com crontab 
+- Para automatizar a execução do script com o Cron, utilizei o seguinte comando para acessar suas configurações.
+```bash
+$ sudo crontab -e
+```
+- Dentro do arquivo adicionei esse comando, oque garante que o monitoramento será executado a cada 1 minuto.
+```bash
+$ */1 * * * * /home/ubuntu/monitoramento.sh
+```
+
+### Testes 
+
+### Conclusão
   
 
 
