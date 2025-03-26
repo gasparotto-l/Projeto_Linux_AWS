@@ -160,10 +160,10 @@ Extra:
 
 | Porta | Protocolo | Origem               | Finalidade                |
 |-------|-----------|----------------------|---------------------------|
-| 22    | TCP       | Meu IP               | | Acesso SSH seguro       |
+| 22    | TCP       | Meu IP               | Acesso SSH seguro       |
 | 80    | TCP       | 0.0.0.0/0            | Acesso HTTP Web para testes   |
 
-![Image](https://github.com/user-attachments/assets/794a5198-b5ec-4664-92a2-999dd4eb0276)
+![Image](https://github.com/user-attachments/assets/cb0b90b6-00b3-40e4-8fdf-8a9ef2e72abe)
 
 Explicação:
 
@@ -487,14 +487,30 @@ $ */1 * * * * /home/ubuntu/MonitoraWeb.sh
 
 
 ### Testes 
+- Primeiro Teste: Executei meu script(sem cron) e verifiquei se fui notificado no discord.
+   ![Image](https://github.com/user-attachments/assets/06bc248c-447d-4209-8fb9-8ffab6853e96)
+   - Discord me notificou que o site está online, ou seja, script funcionando.
+   ![Image](https://github.com/user-attachments/assets/551bb564-e0c2-438f-98ad-3520411643f7)
+- Segundo Teste: Matei/Desativei o Nginx, executei meu script(sem cron) e verifiquei se fui notificado no discord.
+   ![Image](https://github.com/user-attachments/assets/4fd56244-5a0e-4ce7-9471-64dc214c2a15)
+   - Discord me notificou que o site está offline, ou seja, script funcionando.
+   ![Image](https://github.com/user-attachments/assets/5a2c711f-dc75-4295-8ba5-0fce695c2e10)
+- Terceiro Teste: No terceiro teste o cron já estava ativado e executando a verificação do script a cada um minuto
+  ![Image](https://github.com/user-attachments/assets/71f14aa1-751d-47fd-8c50-543ee725c921)
+  - Executei os comandos anteriores e graças ao systemd o site reiniciou e fui notificado, ous seja, tudo certo!
+  ![Image](https://github.com/user-attachments/assets/ba878236-4b2c-43a1-8681-1ec99009a5d0)
 
+### Teste extra
 
 
 ### Observações
-COISAS COMO USO DOS NOMES E ETC
+- Peço perdão por algumas diferenças entre nomes utilizados nos itens do projeto, nem todos os testes, e configurações foram realizados no mesmo dia, então algumas nomenclaturas podem ter mudado
+- Na sessão de vpc e ec2 algumas configurações foram feitas usando a interface da AWS em ingles e outras em portugues, isso ocorreu pelo mesmo motivo das observações a cima.
+- Quaisquer erros ou correções indicadas me coloco a disposição para realização de alterações.
 
 ### Experiencia e Considerações Finais
-CONTAR MINHA EXPERIENCIA
+-  Tive uma boa experiencia realizando esse projeto, as praticas realizadas com certeza me ajudaram a adquirir um bom conhecimento. Foi necessario muita pesquisa para entender o uso dos scripts e automações, e a estruturação de um site em um instancia aws é complexa, mas muito interessante.
+-  Para o primeiro projeto realizado, acho que tive uma performance razoavel. Espero que voce que acabar lendo essa documentação tenha um bom entendimento e consiga realizar de forma semelhante caso queira.
   
 
 
