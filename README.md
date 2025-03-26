@@ -69,14 +69,14 @@ Infraestrutura:
 
 **Criação da VPC**
 - Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
-  IMAGEM PESQUISA VPC
+  ![Image](https://github.com/user-attachments/assets/2c856270-a623-41ee-b4e0-7e026c331764)
 - Cliquei em create vpc, e parti para as configurações.
-  IMAGEM CREATE VPC
+  ![Image](https://github.com/user-attachments/assets/65f73e83-1263-400f-809f-26c28cec924c)
 
 
-### 1. Configuração da VPC:
+### Configuração da VPC:
 
-  IMAGEM CONFIG VPC
+![Image](https://github.com/user-attachments/assets/1d0880dd-2058-4877-b17e-505a301681b2)
   
 **Minhas Escolhas:**
 - VPC e outros recursos
@@ -89,24 +89,24 @@ Infraestrutura:
 - 2 Zonas de Disponibilidade:
   - O mínimo recomendado pra ter redundância básica
   
-IMAGEM AQUI
+![Image](https://github.com/user-attachments/assets/b992d9bf-97b3-4867-a634-8b82d37d4832)
 
-**Estrutura Básica:**
+**Estrutura de Redes:**
 - Redes: Subnets & zonas
   - 2 Zonas (AZs): Redundância mínima
-  - 2 Sub-redes públicas: Para servidores web (1 em cada AZ)
-  - 2 Sub-redes privadas: Para bancos de dados (1 em cada AZ)
+  - 2 Sub-redes públicas
+  - 2 Sub-redes privadas
 
 - Conexões: 
-  - 1 NAT Gateway em AZ: Para permitir o acesso a internet pelas subnets.
-  - Gateway S3: Acesso direto e seguro ao S3 (economiza custos)
+  - Sem NAT Gateway em AZ: o acesso a internet para as subnets é irrelevante pra esse projeto.
+  - Desativado o gateway S3 Acesso, só tem utilidade se estiver utilizando um net getaway.
 
 Extra:
 - DNS ativado: Para resolver nomes internos
 
 **Visão Geral da VPC:**
 
-IMAGEM VISAO GERAL VPC
+![Image](https://github.com/user-attachments/assets/1853bbd8-3622-4280-9eb3-a66d417982c5)
 
 - Observações:
   - O nome escolhido para vpc foi referente ao dia em que ela estava sendo testada, se aparecer outro nomenclatura para a vpc ou ec2 durante essa documentação não se importe, os nomes não alteram o processo do projeto.
@@ -121,9 +121,9 @@ IMAGEM VISAO GERAL VPC
 
 - **Na interface gráfica da AWS:**
    - Pesquisei por "EC2" na barra de pesquisa  
-     ![Image](https://github.com/user-attachments/assets/857aea70-9ef9-4053-be8b-fe1a41e3295d) | IMAGEM PESQUISA VPC
+    ![Image](https://github.com/user-attachments/assets/1e327aca-1945-4955-88e1-cfc6ce77e8fb)
    - Selecionei "Launch Instance" para iniciar as configurações
-     ![Image](https://github.com/user-attachments/assets/d5c532c4-0e10-46c8-96a7-1a806620112c) | IMAGEM LAUNCH VPC
+    ![Image](https://github.com/user-attachments/assets/c724fead-0bdc-4b89-a595-7b1f462f2a94)
 
      
 ---
@@ -134,12 +134,12 @@ IMAGEM VISAO GERAL VPC
 
 ####  Tipo de Imagem
 - **Sistema Operacional**: Ubuntu (Amazon Machine Image)
-    ![Image](https://github.com/user-attachments/assets/c08cdd3b-d90c-4767-96ed-cad38294a426) | IMAGEM TIPO IMAGEM
+    ![Image](https://github.com/user-attachments/assets/a8f27d44-7360-476b-9d6a-35209b39afe6)
 - **Tipo de Instancia**: T2 micro. -> Escolhi por ser uma instancia mais simples, e estar disponivel no free tier
-    ![Image](https://github.com/user-attachments/assets/598f29f1-1043-42f6-8b56-965274d3f8f1) | IMAGEM TIPO INSTANCIA
+    ![Image](https://github.com/user-attachments/assets/9f4345e7-843b-4b2d-aeab-8b5eb5fa5667)
   
 #### Configurações de Rede
-![Image](https://github.com/user-attachments/assets/7340bb9c-30e1-4e78-b92b-061724b4cfa1) | IMAGEM CONFIG REDE VPC
+![Image](https://github.com/user-attachments/assets/b993225d-61c4-4818-a936-a5b452f6bcbf)
 - **VPC**: 
   - Utilizei a VPC criada anteriormente
 - **Subnet**:
@@ -160,11 +160,12 @@ IMAGEM VISAO GERAL VPC
 
 | Porta | Protocolo | Origem               | Finalidade                |
 |-------|-----------|----------------------|---------------------------|
-| 22    | TCP       | Meu IP (ex: 189.5.0.1) | Acesso SSH seguro         |
-| 80    | TCP       | 0.0.0.0/0            | Acesso HTTP para testes   |
+| 22    | TCP       | Meu IP               | | Acesso SSH seguro       |
+| 80    | TCP       | 0.0.0.0/0            | Acesso HTTP Web para testes   |
 
-![Image](https://github.com/user-attachments/assets/0845ab5c-d773-447e-aff1-410141718335) | IMAGEM SECURITY GROUP
+![Image](https://github.com/user-attachments/assets/794a5198-b5ec-4664-92a2-999dd4eb0276)
 
+Explicação:
 
 
 ---
@@ -173,23 +174,23 @@ IMAGEM VISAO GERAL VPC
 
 ### Key Pair
 
-- 1 **Criando Key pair e acessando via ssh**:
+- **Criando Key pair e acessando via ssh**:
    - Gerada via console AWS  
-     ![Image](https://github.com/user-attachments/assets/4b26d7cb-db0f-46a1-9d59-d721e441b377) | IMAGEM CRIANDO KEY PAIR
+   ![Image](https://github.com/user-attachments/assets/a909de3c-3f7e-4f3b-8b12-a403ebf00e28)
 
-- 2 **Configuração no WSL**:
+- **Configuração no WSL**:
    - Arquivo transferido para o subsistema Linux  
-     ![Image](https://github.com/user-attachments/assets/b8b307be-9ed6-4313-b5cb-c0337adc7b4e) | IMAGEM TRANSFERINDO KEY PAIR
+   ![Image](https://github.com/user-attachments/assets/cb21132a-766f-4fca-a0dc-962ded61d6fd)
 
-- 3 **Permissões**:
-![Image](https://github.com/user-attachments/assets/46371724-1927-4250-a25c-90831425bd94) 
+- **Permissões**:
+  ![Image](https://github.com/user-attachments/assets/46371724-1927-4250-a25c-90831425bd94) 
    ```bash
    chmod 400 ~/path/to/my-key.pem
-- 4 **Acessando a via ssh:**
-    - 3.5.1 Primeiro peguei o IPV4:
-    ![Image](https://github.com/user-attachments/assets/c269726f-fad5-4ff7-8885-fa16bd70c9f9) | IMAGEM IPV4
+- **Acessando a via ssh:**
+    - Primeiro peguei o IPV4:
+    ![Image](https://github.com/user-attachments/assets/9347968c-abfd-4860-9eda-cdc70990b92f)
     - Peguei o ipv4 publico para conecatar via ssh na instancia, a partir disso vou poder partir pras configurações.
-- 5 **Acesso via console WSL:**
+- **Acesso via console WSL:**
   
 ![image](https://github.com/user-attachments/assets/62a2c895-0954-4e46-a00a-5950c4293645) 
 
@@ -336,16 +337,6 @@ IMAGEM VISAO GERAL VPC
             </ol>
         </section>
 
-        <section class="section">
-            <h2>Considerações Finais</h2>
-            <ul>
-                <li>Certifique-se de que todas as configurações de segurança estejam corretas</li>
-                <li>Mantenha o repositório atualizado com as últimas alterações e documentações</li>
-                <li>Nunca armazene credenciais ou informações sensíveis no código</li>
-            </ul>
-        </section>
-    </main>
-
     <footer>
         <p>Projeto desenvolvido para fins educacionais e de aprendizado prático.</p>
         <p class="date">Março, 2024</p>
@@ -364,6 +355,8 @@ IMAGEM VISAO GERAL VPC
  
 ---
 
+
+
 - **Acessando**:
   - Acessei via:
     ```bash
@@ -372,7 +365,8 @@ IMAGEM VISAO GERAL VPC
     ```bash
     http://localhost 
     ```
-![image](https://github.com/user-attachments/assets/3b0097c8-da42-4b13-ab68-d1c29628b5fd) | IMAGEM SITE
+**Site Web Online**
+![Image](https://github.com/user-attachments/assets/8a5a2a19-b066-4979-9437-38ad7d11fd85)
   
 ---
 
@@ -406,9 +400,9 @@ IMAGEM VISAO GERAL VPC
 ### Webhook com Discord
  - Antes de começar a criar e usar o script de monitoramento, fiz a integração do webhook no discord:
  - Comecei criando um servidor pessoal e criei dois canais de texto, um em que fiz testes do script localmente e o outro para atender a instancia EC2 que estou utilizando no projeto
-![image](https://github.com/user-attachments/assets/53c3ac03-a345-4e5f-8d4d-e9d042b16b6c) | IMAGEM DISCORD ABERTO
+ ![Image](https://github.com/user-attachments/assets/2d5d98a2-5581-4d6f-8564-f8db90f676e2)
  - No canal de texto #monitora-aws, cliquei no icone configurações e adicionei a integração do webhook
-![image](https://github.com/user-attachments/assets/42cc2b51-2ef6-438e-9995-df08c3ed2566) | CRIANDO WEBHOOK
+![Image](https://github.com/user-attachments/assets/a7e6aba8-3d7e-42be-bde2-a985707e71cf)
  - Peguei o Url do webhook e adicionei ao script para criar a integração.
 
 ---
@@ -418,7 +412,7 @@ IMAGEM VISAO GERAL VPC
  - Acessei a pasta de usuario e criei o arquivo em que estará meu script.
    ```bash
    $ cd ~
-   $ sudo nano monitoramento.sh
+   $ sudo nano MonitoraWeb.sh
    ```
   - Adicionei meu script de monitoramento feito previamente ao arquivo:
     ```bash
@@ -428,8 +422,8 @@ IMAGEM VISAO GERAL VPC
     #==============================================================================================================#
 
     #==Declarando variaveis pro Script | Url do site | Arquivos de Log | Webhook com Discord==#
-    SITE="http://localhost"
-    LOGSITE="/var/log/monitoramento.log"
+    SITE="http://localhost" #Ou ipv4 publico da instancia
+    LOGSITE="/var/log/MonitoraWeb.log" 
     WEBHOOK_DISC="https://discord.com/api/webhooks/1351565786560594060/YOQiWhNPl9Q0_gUDnNXj4a1-bjSJ-VbfhesI4ygLcmopa_Nq_7g8r8Ey_pWcyW_FaLcN"
 
     #==============================================================================================================#
@@ -440,8 +434,8 @@ IMAGEM VISAO GERAL VPC
     echo "$SITE está no ar - $(date)" >> "$LOGSITE"
 
     # Qual a mensagem irá pro webhook?
-    MSGDISC=" **Status do Nginx**: O servidor está online!\n\n"
-    MSGDISC+=" **Monitoramento.sh Executado**: Verifique os logs em /var/log/monitoramento.log."
+    MSGDISC=" **Status do Nginx**: O servidor está online agora!\n\n"
+    MSGDISC+=" **MonitoraWeb Executado**: Verifique os logs em /var/log/MonitoraWeb.log"
 
     # Mensagem  webhook
     curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MSGDISC\"}" "$WEBHOOK_DISC"
@@ -451,7 +445,7 @@ IMAGEM VISAO GERAL VPC
 
     # Qual a mensagem irá pro webhook
     MSGDISC="  **Status do Nginx**: O servidor está offline no momento...\n\n"
-    MSGDISC+=" **Monitoramento.sh Executado**: Verifique os logs em /var/log/monitoramento.log.\n"
+    MSGDISC+=" **MonitoraWeb Executado**: Verifique os logs em /var/log/MonitoraWeb.log.\n"
     MSGDISC+=" **Status do Nginx**: Serviço Nginx será reiniciado ..."
 
     # Mensagem webhook (Discord)
@@ -468,11 +462,11 @@ IMAGEM VISAO GERAL VPC
 - Naveguei até a pasta padrão pra guardar logs e criei o arquivo monitoramento.log para guardar os logs do site.
 ```bash
   $ cd /var/log/
-  $ touch monitoramento.log
+  $ touch MonitoraWeb.log
 ```
 - Para acessar o arquivo de log basta utilizar este comando:
 ```bash
-  $ cat /var/log/monitoramento.log
+  $ cat /var/log/MonitoraWeb.log
 ```
 
 
@@ -486,14 +480,14 @@ $ sudo crontab -e
 ```
 - Dentro do arquivo adicionei esse comando, oque garante que o monitoramento será executado a cada 1 minuto.
 ```bash
-$ */1 * * * * /home/ubuntu/monitoramento.sh
+$ */1 * * * * /home/ubuntu/MonitoraWeb.sh
 ```
 
 ---
 
 
 ### Testes 
-ADICIONAR FOTOS E PRINTS
+
 
 
 ### Observações
