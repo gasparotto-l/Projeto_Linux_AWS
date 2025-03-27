@@ -617,7 +617,7 @@ $ */1 * * * * /home/ubuntu/MonitoraWeb.sh
    ![Image](https://github.com/user-attachments/assets/5a2c711f-dc75-4295-8ba5-0fce695c2e10)
 - Terceiro Teste: No terceiro teste o cron já estava ativado e executando a verificação do script a cada um minuto
   ![Image](https://github.com/user-attachments/assets/71f14aa1-751d-47fd-8c50-543ee725c921)
-  - Executei os comandos anteriores e graças ao systemd o site reiniciou e fui notificado, ous seja, tudo certo!
+  - Executei os comandos anteriores e graças ao systemd o site reiniciou e fui notificado, ou seja, tudo certo!
   ![Image](https://github.com/user-attachments/assets/ba878236-4b2c-43a1-8681-1ec99009a5d0)
 
 
