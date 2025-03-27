@@ -628,12 +628,16 @@ $ */1 * * * * /home/ubuntu/MonitoraWeb.sh
   - Disponível para correções ou ajustes necessários
 
 ### Experiência e Considerações Finais:
-Experiência enriquecedora no gerenciamento de infraestrutura cloud
-Boa oportunidade para desenvolver habilidades em:
-  - Administração AWS
-  - Configuração de servidores web
-  - Automação de tarefas
-  - Projeto adequado para fins educacionais e portfólio
+- Foi uma experiência enriquecedora no gerenciamento de infraestrutura cloud e uma boa oportunidade para desenvolver habilidades em:
+    - Administração AWS
+    - Configuração de servidores web
+    - Automação de tarefas
+    - Projeto para fins educacionais e portfólio
+- Me diverti muito fazendo este projeto, acredito que foi de grande aprendizado para adquirir boas praticas em linux e aws. Espero que todos que leiam essa documentação possam ter um bom entendimento de tudo realizado, sei que não é melhor de todos, mas é feito com muito esforço, e sei que pode melhorar muito ainda!
+
+### Agradecimentos
+**Obrigado pela atenção, eterna gratidão. Ass: Luiz H. Gasparotto**
+
   
 
 
