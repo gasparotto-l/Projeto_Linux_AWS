@@ -1,23 +1,18 @@
- #  Projeto Linux AWS - Monitoramento de Servidor Web
+# Projeto Linux AWS - Monitoramento de Servidor Web
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Bash](https://img.shields.io/badge/bash-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
-
 ---
-
 
 ### Menu do Projeto:
-- | [Menu do Projeto](#menu-do-projeto) | [Detalhes do Projeto](#detalhes-do-projeto) | [Objetivo do projeto](#objetivo-do-projeto) |
-- | [Introdução](#introdução) | - [VPC](#vpc) | [EC2](#ec2) | 
-- | [Servidor Web Nginx](#servidor-web-nginx) | [Webhook com Discord](#webhook-com-discord) | [Script de Monitoramento](#script-de-monitoramento) | [Automação com Cron](#automação-com-cron) |
-- | [Testes](#testes) | [Observações](#observações) | [Experiencia e Considerações Finais](#experiencia-e-considerações-finais) |
-
-
+- [Menu do Projeto](#menu-do-projeto) | [Detalhes do Projeto](#detalhes-do-projeto) | [Objetivo do projeto](#objetivo-do-projeto)
+- [Introdução](#introdução) | [VPC](#vpc) | [EC2](#ec2) 
+- [Servidor Web Nginx](#servidor-web-nginx) | [Webhook com Discord](#webhook-com-discord) | [Script de Monitoramento](#script-de-monitoramento) | [Automação com Cron](#automação-com-cron)
+- [Testes](#testes) | [Observações](#observações) | [Experiência e Considerações Finais](#experiência-e-considerações-finais)
 
 ---
-
 
 ### Detalhes do Projeto
 - **Autor:** Luiz Henrique Gasparotto
@@ -33,14 +28,10 @@ Desenvolver habilidades práticas em:
 - Configuração de servidores web (Nginx)
 - Automação de monitoramento com Bash
 
-
-
 ---
 
-
-
 ### Introdução
-- Neste projeto pessoal, explorei a infraestrutura em nuvem da AWS e o ambiente Linux para criar um servidor web básico com monitoramento automatizado. Utilizei ferramentas como a Interface AWS e o WSL (Windows Subsystem for Linux) para configurar uma instância EC2, implantar um site estático com Nginx e desenvolver um script em Bash para verificar se o site estava no ar.
+Neste projeto pessoal, explorei a infraestrutura em nuvem da AWS e o ambiente Linux para criar um servidor web básico com monitoramento automatizado. Utilizei ferramentas como a Interface AWS e o WSL (Windows Subsystem for Linux) para configurar uma instância EC2, implantar um site estático com Nginx e desenvolver um script em Bash para verificar se o site estava no ar.
 
 Minhas principais tarefas foram:
 - Criar uma VPC com sub-redes públicas e privadas na AWS
@@ -51,12 +42,7 @@ Minhas principais tarefas foram:
 
 O objetivo foi praticar administração de sistemas em nuvem, automação e configuração de servidores, desenvolvendo conhecimentos em AWS, Linux e Bash.
 
-
-
-
 ---
-
-
 
 ### VPC
 Infraestrutura:
@@ -68,26 +54,24 @@ Infraestrutura:
 | **Internet Gateway** | 1 (para acesso à internet) |
 
 **Criação da VPC**
-- Acessei a interface grafica da aws e procurei por VPC na barra de pesquisa
+- Acessei a interface gráfica da AWS e procurei por VPC na barra de pesquisa
   ![Image](https://github.com/user-attachments/assets/2c856270-a623-41ee-b4e0-7e026c331764)
-- Cliquei em create vpc, e parti para as configurações.
+- Cliquei em "Create VPC" e parti para as configurações
   ![Image](https://github.com/user-attachments/assets/65f73e83-1263-400f-809f-26c28cec924c)
 
-
 ### Configuração da VPC:
-
 ![Image](https://github.com/user-attachments/assets/1d0880dd-2058-4877-b17e-505a301681b2)
   
 **Minhas Escolhas:**
 - VPC e outros recursos
-  - Criei tudo completo (sub-redes, gateways) pra já ficar pronto pra usar -
+  - Criei tudo completo (sub-redes, gateways) para já ficar pronto para usar
 - Nome automático "testesegunda"
-  - Todos os recursos ficam com o mesmo prefixo, mais fácil de achar
+  - Todos os recursos ficam com o mesmo prefixo, mais fácil de encontrar
 - Bloco de IPs 10.0.0.0/16
-  - Espaço grande (65 mil IPs) pra não faltar endereço
-- Sem IPv6: Só usei IPv4 pra simplificar nesse projeto
+  - Espaço grande (65 mil IPs) para não faltar endereço
+- Sem IPv6: Só usei IPv4 para simplificar neste projeto
 - 2 Zonas de Disponibilidade:
-  - O mínimo recomendado pra ter redundância básica
+  - O mínimo recomendado para ter redundância básica
   
 ![Image](https://github.com/user-attachments/assets/b992d9bf-97b3-4867-a634-8b82d37d4832)
 
@@ -98,44 +82,35 @@ Infraestrutura:
   - 2 Sub-redes privadas
 
 - Conexões: 
-  - Sem NAT Gateway em AZ: o acesso a internet para as subnets é irrelevante pra esse projeto.
-  - Desativado o gateway S3 Acesso, só tem utilidade se estiver utilizando um net getaway.
+  - Sem NAT Gateway em AZ: o acesso à internet para as subnets é irrelevante para esse projeto
+  - Desativei o gateway S3 Acesso, só tem utilidade se estiver utilizando um NAT gateway
 
 Extra:
 - DNS ativado: Para resolver nomes internos
 
 **Visão Geral da VPC:**
-
 ![Image](https://github.com/user-attachments/assets/1853bbd8-3622-4280-9eb3-a66d417982c5)
 
 - Observações:
-  - O nome escolhido para vpc foi referente ao dia em que ela estava sendo testada, se aparecer outro nomenclatura para a vpc ou ec2 durante essa documentação não se importe, os nomes não alteram o processo do projeto.
-
-
+  - O nome escolhido para VPC foi referente ao dia em que ela estava sendo testada. Se aparecer outra nomenclatura para a VPC ou EC2 durante esta documentação, não se preocupe, os nomes não alteram o processo do projeto.
 
 ---
 
-
-
 ### EC2
-
 - **Na interface gráfica da AWS:**
    - Pesquisei por "EC2" na barra de pesquisa  
     ![Image](https://github.com/user-attachments/assets/1e327aca-1945-4955-88e1-cfc6ce77e8fb)
    - Selecionei "Launch Instance" para iniciar as configurações
     ![Image](https://github.com/user-attachments/assets/c724fead-0bdc-4b89-a595-7b1f462f2a94)
 
-     
 ---
-
-
 
 ### Configurações da EC2
 
-####  Tipo de Imagem
+#### Tipo de Imagem
 - **Sistema Operacional**: Ubuntu (Amazon Machine Image)
     ![Image](https://github.com/user-attachments/assets/a8f27d44-7360-476b-9d6a-35209b39afe6)
-- **Tipo de Instancia**: T2 micro. -> Escolhi por ser uma instancia mais simples, e estar disponivel no free tier
+- **Tipo de Instância**: T2 micro -> Escolhi por ser uma instância mais simples e estar disponível no free tier
     ![Image](https://github.com/user-attachments/assets/9f4345e7-843b-4b2d-aeab-8b5eb5fa5667)
   
 #### Configurações de Rede
@@ -147,12 +122,7 @@ Extra:
 - **IP Público**:
   - Atribuição automática habilitada
 
-
-
-
 ---
-
-
 
 ### Security Group
 
@@ -160,21 +130,16 @@ Extra:
 
 | Porta | Protocolo | Origem               | Finalidade                |
 |-------|-----------|----------------------|---------------------------|
-| 22    | TCP       | Meu IP               | Acesso SSH seguro       |
-| 80    | TCP       | 0.0.0.0/0            | Acesso HTTP Web para testes   |
+| 22    | TCP       | Meu IP               | Acesso SSH seguro         |
+| 80    | TCP       | 0.0.0.0/0            | Acesso HTTP Web para testes |
 
 ![Image](https://github.com/user-attachments/assets/cb0b90b6-00b3-40e4-8fdf-8a9ef2e72abe)
 
-Explicação:
-
-
 ---
-
-
 
 ### Key Pair
 
-- **Criando Key pair e acessando via ssh**:
+- **Criando Key pair e acessando via SSH**:
    - Gerada via console AWS  
    ![Image](https://github.com/user-attachments/assets/a909de3c-3f7e-4f3b-8b12-a403ebf00e28)
 
@@ -194,7 +159,7 @@ Explicação:
   
 ![image](https://github.com/user-attachments/assets/62a2c895-0954-4e46-a00a-5950c4293645) 
 
-- Utilezei esse comando pra acessar o ssh, com minha key pair e ipv4 publico da instancia.
+- Utilizei esse comando pra acessar o ssh, com minha key pair e ipv4 publico da instancia.
   ```bash
     $ sudo ssh -i chaveteste.pem ubuntu@ipv4VaiAqui
   ```    
@@ -207,13 +172,13 @@ Explicação:
 
 ### Servidor Web Nginx
 
-- ** Instalando**:
+- **Instalando**:
   - Atualizei o sistema com:
     ```bash
     sudo apt-get update
     sudo apt-get upgrade -y
     ```
-  - Instalei o Nginx usando:
+  - **Instalei o Nginx usando:**
     ```bash
     sudo apt-get install nginx -y
     sudo apt-get update -y
@@ -345,11 +310,11 @@ Explicação:
     </html>
     ```
 
-    - Reiniciei o serviço:
-    ```bash
-    sudo systemctl restart nginx
-    ```
-   - E agora o site está online e com o html alterado.
+- Reiniciei o serviço:
+  ```bash
+  sudo systemctl restart nginx
+  ```
+- E agora o site está online e com o html alterado.
 
 
  
@@ -367,13 +332,15 @@ Explicação:
     ```
 **Site Web Online**
 ![Image](https://github.com/user-attachments/assets/8a5a2a19-b066-4979-9437-38ad7d11fd85)
+
+
   
 ---
 
 
 
 ### Configuração do SystemD
-- Editei o serviço do nginx para garantir reinicilização automatica:
+- Editei o serviço do nginx para garantir reinicialização automatica:
 ```bash 
    $ sudo nano /usr/lib/systemd/system/nginx.service
 ```
@@ -393,6 +360,58 @@ Explicação:
   $ sudo pkill -9 nginx
   $ sudo systemctl status nginx
 ```
+---
+
+
+
+### Estrutura do Nginx:
+ - Configurações gerais do nginx
+ ```bash
+    /etc/nginx/nginx.conf 
+ ```
+ - Configurações de sites disponiveis
+ ```bash
+    /etc/nginx/sites-available/
+ ```
+ - Configurações dos sites ativados
+ ```bash
+    /etc/nginx/sites-enabled/
+ ```  
+ - Configuração do serviço do Nginx
+ ```bash
+    /lib/systemd/system/nginx.service
+ ```    
+- Organização Geral:
+```bash
+    /
+├── etc/
+│   ├── nginx/
+│   │   ├── nginx.conf
+│   │   ├── sites-available/
+│   │   └── sites-enabled/
+│   └── systemd/
+│        └── system/
+│             └── nginx.service
+│       
+│         
+│
+├── var/
+│   ├── www/
+│   │   └── html/
+│   │       └── index.html
+│   └── log/
+│       ├── nginx/
+│       │   ├── access.log
+│       │   └── error.log
+│       └── MonitoraWeb.log
+│
+└── home/
+    └── ubuntu/
+        └── MonitoraWeb.sh
+
+ ``` 
+
+
 
 
 ---
@@ -456,9 +475,110 @@ Explicação:
     #==============================================================================================================#
     ```
     
-  - Explicação do Script: ADICIONAR AINDA <- IMPORTANTE
+### Explicação do Script:
+-  Visão geral do Script:
+   - Este script verifica periodicamente se o servidor Nginx está respondendo corretamente (status HTTP 200). Caso contrário, ele registra o incidente em um arquivo de log e envia uma notificação para um canal Discord através de     um webhook.
+
+- Variaveis:
+  ```bash
+  SITE="http://localhost(Ou IPv4 público da instancia)"  # URL do site a ser monitorado
+  LOGSITE="/var/log/MonitoraWeb.log"  # Arquivo de log para registros
+  WEBHOOK_DISC="https://discord.com/api/webhooks/..."  # Webhook do Discord
+  ```
+### Explicação detalhada do Script:
+
+**Shebang e Cabeçalho:**
+```bash
+#!/usr/bin/env bash
+```
+- `#!/usr/bin/env bash`: Especifica que o script deve ser executado pelo interpretador Bash.
+
+**Verificação de Status do Site:**
+```bash
+if curl -s --head "$SITE" | grep "200 OK" > /dev/null; then
+```
+
+  - `curl -s --head "$SITE"`: Faz uma requisição HTTP HEAD silenciosa (-s) para a URL.
+  - `grep "200 OK"`: Filtra a saída procurando pelo status HTTP 200(esse número representa sucesso na saída).
+  - `> /dev/null`: Redireciona a saída para o "buraco negro" do Linux (descarta a saída).
+  - `if...then`: Estrutura condicional que executa o bloco seguinte se o comando retornar sucesso.
+
+**Registro em Log (Online)**
+```bash
+echo "$SITE está no ar - $(date)" >> "$LOGSITE"
+```
+  - `echo`: Para exibir a mensagem no terminal.
+  - `$(date)`: Inserir a data/hora atual.
+  - `>>`: Redireciona a saída para o final do arquivo.
+  - `$LOGSITE`: Variável que contém o caminho do arquivo de log.
+
+**Construção da Mensagem para Discord (Online)**
+```bash
+MSGDISC=" **Status do Nginx**: O servidor está online agora!\n\n"
+MSGDISC+=" **MonitoraWeb Executado**: Verifique os logs em /var/log/MonitoraWeb.log"
+```
+
+  - `MSGDISC=`: Atribuição de string à variável.
+  - `\n`: Caractere de nova linha.
+  - `+=`: Concatenação de strings à variável existente.
+
+**Envio para Webhook Discord (Online)**
+```bash
+curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MSGDISC\"}" "$WEBHOOK_DISC"
+```
+
+  - `curl -X POST`: Envia uma requisição HTTP POST.
+  - `-X POST `: Indica que é uma requisição do tipo POST
+  - `-H "Content-Type: application/json"`: Define o cabeçalho HTTP.
+  - `-d "{\"content\":\"$MSGDISC\"}"`: Corpo da requisição em JSON.
+  - `$WEBHOOK_DISC`: Variável com URL do webhook.
+
+**Bloco Else (Offline)**
+
+```bash
+else
+```
+
+- Entra neste bloco quando o `if` anterior falha (status não é 200 OK).
+- Registro em Log (Offline)
+
+```bash
+echo "$SITE está offline - $(date)" >> "$LOGSITE"
+```
+
+- Similar ao online, mas registra status offline.
+
+**Construção da Mensagem para Discord (Offline)**
+
+```bash
+MSGDISC=" **Status do Nginx**: O servidor está offline no momento...\n\n"
+MSGDISC+=" **MonitoraWeb Executado**: Verifique os logs em /var/log/MonitoraWeb.log.\n"
+MSGDISC+=" **Status do Nginx**: Serviço Nginx será reiniciado ..."
+```
+
+  - Mensagem mais detalhada sobre o status offline.
+  - Envio para Webhook Discord (Offline)
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"$MSGDISC\"}" "$WEBHOOK_DISC"
+```
+
+  - Igual ao online, mas envia a mensagem de offline.
+
+ **Estrutura de Controle:**
+
+```bash
+fi
+```
+
+- Fecha o bloco condicional `if` iniciado no começo.
 
 
+---
+
+
+### Criação dos Logs
+  
 - Naveguei até a pasta padrão pra guardar logs e criei o arquivo monitoramento.log para guardar os logs do site.
 ```bash
   $ cd /var/log/
@@ -500,17 +620,20 @@ $ */1 * * * * /home/ubuntu/MonitoraWeb.sh
   - Executei os comandos anteriores e graças ao systemd o site reiniciou e fui notificado, ous seja, tudo certo!
   ![Image](https://github.com/user-attachments/assets/ba878236-4b2c-43a1-8681-1ec99009a5d0)
 
-### Teste extra
 
 
-### Observações
-- Peço perdão por algumas diferenças entre nomes utilizados nos itens do projeto, nem todos os testes, e configurações foram realizados no mesmo dia, então algumas nomenclaturas podem ter mudado
-- Na sessão de vpc e ec2 algumas configurações foram feitas usando a interface da AWS em ingles e outras em portugues, isso ocorreu pelo mesmo motivo das observações a cima.
-- Quaisquer erros ou correções indicadas me coloco a disposição para realização de alterações.
+### Observações:
+  - Algumas nomenclaturas podem variar entre as seções pois os testes foram realizados em dias diferentes
+  - A interface da AWS foi utilizada tanto em português quanto em inglês durante o projeto
+  - Disponível para correções ou ajustes necessários
 
-### Experiencia e Considerações Finais
--  Tive uma boa experiencia realizando esse projeto, as praticas realizadas com certeza me ajudaram a adquirir um bom conhecimento. Foi necessario muita pesquisa para entender o uso dos scripts e automações, e a estruturação de um site em um instancia aws é complexa, mas muito interessante.
--  Para o primeiro projeto realizado, acho que tive uma performance razoavel. Espero que voce que acabar lendo essa documentação tenha um bom entendimento e consiga realizar de forma semelhante caso queira.
+### Experiência e Considerações Finais:
+Experiência enriquecedora no gerenciamento de infraestrutura cloud
+Boa oportunidade para desenvolver habilidades em:
+  - Administração AWS
+  - Configuração de servidores web
+  - Automação de tarefas
+  - Projeto adequado para fins educacionais e portfólio
   
 
 
