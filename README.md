@@ -443,7 +443,7 @@ Extra:
     #==Declarando variaveis pro Script | Url do site | Arquivos de Log | Webhook com Discord==#
     SITE="http://localhost" #Ou ipv4 publico da instancia
     LOGSITE="/var/log/MonitoraWeb.log" 
-    WEBHOOK_DISC="https://discord.com/api/webhooks/1351565786560594060/YOQiWhNPl9Q0_gUDnNXj4a1-bjSJ-VbfhesI4ygLcmopa_Nq_7g8r8Ey_pWcyW_FaLcN"
+    WEBHOOK_DISC="LINK_DO_WEBHOOK"
 
     #==============================================================================================================#
     #==Inicio do Script==#
